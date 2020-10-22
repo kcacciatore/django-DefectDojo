@@ -25,13 +25,15 @@ class GosecScannerParser(object):
 #           Finding details information
             findingdetail += "Filename: {}\n\n".format(filename)
             findingdetail += "Line number: {}\n\n".format(str(line))
-            findingdetail += "Issue Confidence: {}\n\n".format(scanner_confidence)
+            findingdetail += "Issue Confidence: {}\n\n".format(
+                scanner_confidence)
             findingdetail += "Code:\n\n"
             findingdetail += "```{}```".format(item["code"])
 
             sev = item["severity"]
             # Best attempt at ongoing documentation provided by gosec, based on rule id
-            references = "https://securego.io/docs/rules/{}.html".format(item['rule_id']).lower()
+            references = "https://securego.io/docs/rules/{}.html".format(
+                item['rule_id']).lower()
 
             if scanner_confidence:
                 # Assign integer value to confidence.
@@ -59,7 +61,8 @@ class GosecScannerParser(object):
                                verified=False,
                                description=findingdetail,
                                severity=sev.title(),
-                               numerical_severity=Finding.get_numerical_severity(sev),
+                               numerical_severity=Finding.get_numerical_severity(
+                                   sev),
                                impact=impact,
                                references=references,
                                file_path=filename,
